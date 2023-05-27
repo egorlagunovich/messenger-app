@@ -14,6 +14,7 @@ type NavbarProps = {
 };
 export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
   const [authing, setAuthing] = useState(false);
+  const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
     AuthCheck();
@@ -44,16 +45,28 @@ export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
       });
   };
   return (
-    <nav className="flex flex-row justify-between">
-      <h1>Chat App</h1>
+    <nav className="flex flex-row justify-between items-center p-5 bg-navGrey bottom-shadow">
+      <h1 className="text-mainBlue text-3xl font-bold ">stomachbook</h1>
       {isLogIn ? (
-        <button
-          onClick={() => {
-            signOutWithGoogle();
-          }}
-        >
-          Sign out
-        </button>
+        <div className="flex flex-row">
+          <img
+            src={auth.currentUser?.photoURL!}
+            alt="avatar"
+            className="w-16 h-16 rounded-full"
+          />
+          <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+            {auth.currentUser?.displayName}
+          </span>
+          ;
+          <button
+            onClick={() => {
+              signOutWithGoogle();
+            }}
+            className="bg-mainBlue text-white px-3 py-1 rounded-lg"
+          >
+            Sign out
+          </button>
+        </div>
       ) : (
         <button
           onClick={() => {
@@ -61,7 +74,9 @@ export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
           }}
           disabled={authing}
         >
-          Sign in
+          <img
+            src={require("./../assets/btn_google_signin_dark_normal_web.png")}
+          />
         </button>
       )}
     </nav>
