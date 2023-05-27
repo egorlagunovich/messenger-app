@@ -1,14 +1,23 @@
 import React from "react";
-import Navbar from "./components/navbar/Navbar";
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { config } from "./config/config";
+import ChatBox from "./components/ChatBox";
+import { getAuth } from "firebase/auth";
+import Home from "./components/Home";
 
-initializeApp(config.firebaseConfig);
+const app = initializeApp(config.firebaseConfig);
+export const auth = getAuth();
+export const db = getFirestore(app);
 
 function App() {
+  const [isLogIn, setIsLogin] = useState(false);
   return (
     <div className="App">
-      <Navbar />
+      <Navbar setIsLogin={setIsLogin} isLogIn={isLogIn} />
+      {isLogIn ? <ChatBox /> : <Home />}
     </div>
   );
 }

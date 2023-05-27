@@ -2,16 +2,18 @@ import React from "react";
 import { useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
-  getAuth,
   onAuthStateChanged,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import { auth } from "../App";
 
-export default function Navbar() {
+type NavbarProps = {
+  setIsLogin(arg: boolean): void;
+  isLogIn: boolean;
+};
+export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
   const [authing, setAuthing] = useState(false);
-  const [isLogIn, setIsLogin] = useState(false);
-  const auth = getAuth();
 
   useEffect(() => {
     AuthCheck();
@@ -33,7 +35,6 @@ export default function Navbar() {
     setAuthing(true);
     signInWithPopup(auth, new GoogleAuthProvider())
       .then((response) => {
-        console.log(response.user.displayName);
         setIsLogin(true);
         setAuthing(false);
       })
@@ -43,25 +44,26 @@ export default function Navbar() {
       });
   };
   return (
-    <nav>
+    <nav className="flex flex-row justify-between">
       <h1>Chat App</h1>
-
-      <button
-        onClick={() => {
-          signInWithGoogle();
-        }}
-        disabled={authing}
-      >
-        Sign in
-      </button>
-      <button
-        onClick={() => {
-          signOutWithGoogle();
-        }}
-      >
-        Sign out
-      </button>
-      {isLogIn ? "Hello!" : "Please, log in"}
+      {isLogIn ? (
+        <button
+          onClick={() => {
+            signOutWithGoogle();
+          }}
+        >
+          Sign out
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            signInWithGoogle();
+          }}
+          disabled={authing}
+        >
+          Sign in
+        </button>
+      )}
     </nav>
   );
 }
