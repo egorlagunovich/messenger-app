@@ -14,8 +14,6 @@ type NavbarProps = {
 };
 export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
   const [authing, setAuthing] = useState(false);
-  const [isShown, setIsShown] = useState(false);
-
   useEffect(() => {
     AuthCheck();
     return () => AuthCheck();
@@ -27,7 +25,6 @@ export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
       console.log("log in!");
     }
   });
-
   const signOutWithGoogle = () => {
     signOut(auth);
     setIsLogin(false);
@@ -35,13 +32,14 @@ export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
   const signInWithGoogle = async () => {
     setAuthing(true);
     signInWithPopup(auth, new GoogleAuthProvider())
-      .then((response) => {
+      .then(() => {
         setIsLogin(true);
         setAuthing(false);
       })
       .catch((error) => {
         console.log(error);
         setAuthing(false);
+        setIsLogin(false);
       });
   };
   return (
