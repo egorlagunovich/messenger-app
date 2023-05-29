@@ -26,7 +26,7 @@ export default function SendMessage() {
     setCurrentMessage("");
   };
   return (
-    <form onSubmit={(e) => sendMessage(e)}>
+    <form onSubmit={(e) => sendMessage(e)} className="mb-10">
       <input
         type="text"
         placeholder="Type message.."

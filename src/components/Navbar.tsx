@@ -64,19 +64,18 @@ export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
     if (currentUser === "{}") setIsLogin(false);
   }, []);
   return (
-    <nav className="flex flex-row justify-between items-center p-5 bg-navGrey bottom-shadow min-w-full">
+    <nav className="flex md:flex-row flex-col justify-between items-center p-5 bg-navGrey bottom-shadow min-w-full">
       <h1 className="text-mainBlue text-3xl font-bold ">stomachbook</h1>
       {isLogIn ? (
         <div className="flex flex-row">
-          <img
-            src={currentUser.photoURL}
-            alt="avatar"
-            className="w-16 h-16 rounded-full"
-          />
-          <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            {currentUser.displayName}
-          </span>
-          ;
+          <div className="flex flex-col justify-center items-center mr-4">
+            <img
+              src={currentUser.photoURL}
+              alt="avatar"
+              className="w-10 h-10 rounded-full"
+            />
+            <span>{currentUser.displayName}</span>
+          </div>
           <button
             onClick={() => {
               signOutWithGoogle();

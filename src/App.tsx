@@ -14,15 +14,10 @@ export const auth = getAuth();
 export const db = getFirestore(app);
 
 function App() {
-  const [currentAuth, setCurrentAuth] = useState(auth);
   const [isLogIn, setIsLogin] = useState(false);
   return (
-    <div className="bg-homeGrey relative min-h-screen flex flex-col justify-normal items-center ">
-      <Navbar
-        setIsLogin={setIsLogin}
-        isLogIn={isLogIn}
-        // currentAuth={currentAuth}
-      />
+    <div className="bg-mainHome relative min-h-screen flex flex-col justify-normal items-center ">
+      <Navbar setIsLogin={setIsLogin} isLogIn={isLogIn} />
       {isLogIn ? <ChatBox /> : <Home />}
       <Footer />
     </div>
