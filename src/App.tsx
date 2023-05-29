@@ -7,6 +7,7 @@ import { config } from "./config/config";
 import ChatBox from "./components/ChatBox";
 import { getAuth } from "firebase/auth";
 import Home from "./components/Home";
+import Footer from "./components/Footer";
 
 const app = initializeApp(config.firebaseConfig);
 export const auth = getAuth();
@@ -16,13 +17,14 @@ function App() {
   const [currentAuth, setCurrentAuth] = useState(auth);
   const [isLogIn, setIsLogin] = useState(false);
   return (
-    <div className="App">
+    <div className="bg-homeGrey relative min-h-screen flex flex-col justify-normal items-center ">
       <Navbar
         setIsLogin={setIsLogin}
         isLogIn={isLogIn}
         // currentAuth={currentAuth}
       />
       {isLogIn ? <ChatBox /> : <Home />}
+      <Footer />
     </div>
   );
 }

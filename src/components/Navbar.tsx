@@ -64,7 +64,7 @@ export default function Navbar({ setIsLogin, isLogIn }: NavbarProps) {
     if (currentUser === "{}") setIsLogin(false);
   }, []);
   return (
-    <nav className="flex flex-row justify-between items-center p-5 bg-navGrey bottom-shadow">
+    <nav className="flex flex-row justify-between items-center p-5 bg-navGrey bottom-shadow min-w-full">
       <h1 className="text-mainBlue text-3xl font-bold ">stomachbook</h1>
       {isLogIn ? (
         <div className="flex flex-row">

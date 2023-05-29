@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         mainBlue: "#1A77F2",
         navGrey: "#F7F8FA",
+        homeGrey: "#F2F3F5",
       },
     },
   },
