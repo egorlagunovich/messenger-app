@@ -9,8 +9,7 @@ interface MessagesProps {
 
 export default function Message({ message }: MessagesProps) {
   const [user] = useAuthState(auth);
-  const uid = user ? "user.id" : "";
-
+  const uid = user ? user.uid : "";
   return (
     <div className={`chat-bubble ${message.uid === uid ? "right" : ""}`}>
       <img

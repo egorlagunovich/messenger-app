@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
 import {
   query,
   collection,
@@ -19,6 +20,7 @@ interface Messages {
 
 export default function ChatBox() {
   const [initialMessages, setInitialMessages] = useState<Messages[]>([]);
+  const scroll = React.createRef();
   useEffect(() => {
     const q = query(
       collection(db, "messages"),
@@ -37,12 +39,13 @@ export default function ChatBox() {
   }, []);
 
   return (
-    <main>
-      <div>
+    <main className="chat-box max-h-screen">
+      <div className="messages-wrapper">
         {initialMessages?.map((message) => (
           <Message key={message.id} message={message} />
         ))}
       </div>
+      <span></span>
       <SendMessage />
     </main>
   );

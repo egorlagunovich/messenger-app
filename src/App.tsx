@@ -16,7 +16,7 @@ export const db = getFirestore(app);
 function App() {
   const [isLogIn, setIsLogin] = useState(false);
   return (
-    <div className="bg-mainHome relative min-h-screen flex flex-col justify-normal items-center ">
+    <div className="bg-mainHome">
       <Navbar setIsLogin={setIsLogin} isLogIn={isLogIn} />
       {isLogIn ? <ChatBox /> : <Home />}
       <Footer />
